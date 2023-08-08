@@ -1,0 +1,68 @@
+{% load static %}
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Empyreal{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+
+
+</head>
+
+<body>
+    <nav id="navigation" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">
+                        <h2 id="brand-name">
+                            Empyreal
+                        </h2>
+                    </a> 
+                </li>
+            </ul>
+
+            <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+                <!-- <div class="d-flex justify-content-end" style="position:absolute;"> -->
+                    <ul class="nav">
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                    </ul>
+                <!-- </div> -->
+            <!-- </div>     -->
+
+        </div>       
+    </nav>
+
+        
+    
+    <!-- Footer -->
+    <div class="spacer bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+            <div class="col-lg-6 mx-auto">
+                <!-- <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> -->
+                <!-- <a href="#intro"><img src="{% static 'images/facebook-50.svg' %}"></a>
+                <a href="#intro"><img src="{% static 'images/instagram-50.svg' %}"></a>
+                <a href="#intro"><img src="{% static 'images/twitter-50.svg' %}"></a>
+                <a href="#intro"><img src="{% static 'images/youtube-50.svg' %}"></a> -->
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <p>&copy; 2023 Empyreal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

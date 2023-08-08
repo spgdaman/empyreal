@@ -1,0 +1,65 @@
+{% load static %}
+
+<!-- Second navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Left</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="//codeply.com">Codeply</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li> -->
+      </ul>
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" style="color: #0a7bff;">
+        </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Right</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li> -->
+            {% if user.is_authenticated %}
+            <div class="dropdown show">
+                <a class="mx-2 my-1 btn btn-outline-secondary btn-small dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.first_name }}
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                    <a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'index' %}">Welcome page</a>
+                </div>
+            </div>
+
+            {% else %}
+                <p class="my-1 mr-2">You are not logged in</p>
+                <a class="btn btn-light btn-outline-secondary my-0" href="{% url 'login' %}">Log In</a>
+            {% endif %}
+          </div>
+        </ul>
+    </div>
+
+  </div>
+</nav>
