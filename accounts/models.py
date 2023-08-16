@@ -88,15 +88,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.email}"
     
-    # def has_perm(self, perm, obj=None):
-    #     "Does the user have a specific permission?"
-    #     # Simplest possible answer: Yes, always
-    #     return True
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
     
-    # def has_module_perms(self, app_label):
-    #     "Does the user have permissions to view the app 'app_label'?"
-    #     # Simplest possible answer: Yes, always
-    #     return True
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app 'app_label'?"
+        # Simplest possible answer: Yes, always
+        return True
     
     # @property
     # def is_staff(self):
@@ -106,7 +106,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # @property
     # def is_admin(self):
     #     "Is the user a admin member?"
-    #     return self.admin
+    #     return self.is_admin
     
     objects = UserManager()
 
