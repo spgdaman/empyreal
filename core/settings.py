@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'appname.middleware.MultitenantMiddleware',
+    'tenants.middleware.MultitenantMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
