@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'api',
+    'tenants',
     
     'bootstrap4',
     'crispy_forms',
