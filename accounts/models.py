@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, AbstractUser, PermissionsMixin
 )
+from tenants.models import *
 # from django.contrib.auth.models import Group as DjangoGroup
 
 # class GroupPermissions(models.Model):
@@ -72,6 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE, null=True)
     # groups = models.ManyToManyField(GroupPermissions, null=True, verbose_name=('Group Permissions'), blank=True, help_text=('The groups this user belongs to. A user will get all permissions granted to each of their groups.'))
 
     USERNAME_FIELD = 'email'

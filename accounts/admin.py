@@ -11,7 +11,7 @@ from .models import User
 
 class UserAdmin(UserAdmin):
     model = User
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_admin', 'is_superuser', 'last_login',)
+    list_display = ('email', 'tenant', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_admin', 'is_superuser', 'last_login',)
     search_fields = ('email','first_name', 'last_name',)
     ordering = ('first_name', 'last_name', 'email',)
     # filter_horizontal = ('groups', 'user_permissions',)

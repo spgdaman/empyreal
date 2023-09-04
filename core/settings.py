@@ -30,12 +30,13 @@ SECRET_KEY = "ho*8zrxj*&23!@9&ku1hp@r%i@_z163%bv3pi@i@3g!$8od6s^"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','localhost',]
+ALLOWED_HOSTS = ['*',]
 
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
-    'api',
+    
     'tenants',
     
     'bootstrap4',
@@ -53,7 +54,25 @@ INSTALLED_APPS = [
     'computedfields',
 
     'rest_framework',
-]
+    'django_tenants',
+)
+
+TENANT_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # your tenant-specific apps
+    'api',
+    'payday',
+)
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_MODEL = 'tenants.Tenant'
+TENANT_DOMAIN_MODEL = "tenants.Domain"
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -66,6 +85,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,10 +95,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'tenants.middleware.MultitenantMiddleware',
+    # 'tenants.middleware.MultitenantMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
+PUBLIC_SCHEMA_URLCONF = 'core.urls_public'
 
 TEMPLATES = [
     {
@@ -121,12 +142,27 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'sqlite3.db',                      # Or path to database file if using sqlite3.
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sqlite3.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'empyreal',
+        'USER': 'postgres',
+        'PASSWORD': 'W3w3n!h@g@',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
