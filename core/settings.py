@@ -44,7 +44,7 @@ SHARED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'accounts',
+    
     
     'tenants',
     
@@ -55,6 +55,7 @@ SHARED_APPS = (
 
     'rest_framework',
     'django_tenants',
+    'sweet_shared',
 )
 
 TENANT_APPS = (
@@ -65,8 +66,10 @@ TENANT_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # your tenant-specific apps
+    'accounts', 
     'api',
     'payday',
+    'sweet_tenant',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
